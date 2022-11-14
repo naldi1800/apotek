@@ -97,7 +97,7 @@ if (isset($_POST["tambah"])) {
 
         document.getElementById("jml").value = 1;
         document.getElementById("jml").max = e.options[e.selectedIndex].dataset.stok;
-
+        
         getTotal();
 
     }

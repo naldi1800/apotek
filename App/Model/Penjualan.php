@@ -57,11 +57,13 @@ class Penjualan extends Data
 
     public static function Insert($link, $data)
     {
-        $sql = "INSERT INTO " . parent::$t_penjualan . " VALUES( '"
-            . $data['kode_mk'] . "','"
-            . $data['nama_mk'] . "','"
-            . $data['semester'] . "','"
-            . $data['sks'] . "')";
+        $sql = "INSERT INTO " . parent::$t_penjualan . " VALUES( null,'"
+            . $data['id_obat'] . "','"
+            . $_SESSION['id_karyawan'] . "','"
+            . $data['harga'] . "','"
+            . $data['diskon'] . "','"
+            . $data['jml'] . "','"
+            . "2022-11-14 01:00:00" . "')";
 
         $query = mysqli_query($link, $sql);
         if ($query) {
