@@ -43,15 +43,15 @@ if (isset($_POST["tambah"])) {
         </div>
         <div class="col-md-3">
             <label for="harga" class="form-label">Harga</label>
-            <input type="text" class="form-control" id="harga" name="harga" minlength="3" required readonly>
+            <input type="text" class="form-control" id="harga" value="0" name="harga" minlength="3" required readonly>
         </div>
         <div class="col-md-2">
-            <label for="stok" class="form-label">Stok</label>
-            <input type="text" class="form-control" id="stok" name="stok" minlength="3" required readonly>
+            <label for="stok" class="form-label">Sisa</label>
+            <input type="text" class="form-control" id="stok" value="0" name="stok" minlength="3" required readonly>
         </div>
         <div class="col-md-4">
-            <label for="totalbeli" class="form-label">Total Beli</label>
-            <input type="number" class="form-control" id="totalbeli" name="totalbeli" min="1" value="1" required>
+            <label for="jml" class="form-label">Jumlah Beli</label>
+            <input type="number" class="form-control" onchange="cJml();" id="jml" name="jml" min="1" value="0" required>
             <div class="valid-feedback">
                 Looks good!
             </div>
@@ -60,26 +60,62 @@ if (isset($_POST["tambah"])) {
             </div>
         </div>
         <div class="col-md-4">
-            <label for="total_harga" class="form-label">Total Harga</label>
-            <input type="text" class="form-control" id="total_harga" name="total_harga" required readonly>
+            <label for="total" class="form-label">Total Harga</label>
+            <input type="text" class="form-control" id="total" name="total" required readonly>
         </div>
         <div class="col-md-4">
             <label for="diskon" class="form-label">Diskon</label>
             <input type="text" class="form-control" id="diskon" name="diskon" required readonly>
         </div>
-        <div class="col-12">
-            <button class="btn btn-primary" type="submit" name="tambah">Save</button>
+        <div class="col-md-4">
+            <label for="total_bayar" class="form-label">Total Bayar</label>
+            <input type="text" class="form-control" id="total_bayar" name="total_bayar" required readonly>
+        </div>
+        <div class="col-md-4">
+            <label for="uang" class="form-label">Uang</label>
+            <input type="text" class="form-control" value="0" onkeyup="getSisa();" id="uang" name="uang" required>
+        </div>
+        <div class="col-md-4">
+            <label for="sisa" class="form-label">Kembalian</label>
+            <input type="text" class="form-control" value="0" id="sisa" name="sisa" required readonly>
+        </div>
+        <div class="col-12 text-center">
+            <button class="btn btn-primary col-md-12" type="submit" name="tambah">Save</button>
         </div>
     </form>
 </div>
 
 <script>
+    var dis = 0;
+
     function getObat(e) {
         document.getElementById("nama_obat").value = e.options[e.selectedIndex].dataset.nama;
         document.getElementById("harga").value = e.options[e.selectedIndex].dataset.harga;
         document.getElementById("stok").value = e.options[e.selectedIndex].dataset.stok;
+        dis = e.options[e.selectedIndex].dataset.diskon;
+        document.getElementById("diskon").value = dis + "%";
+
+        document.getElementById("jml").value = 1;
+        document.getElementById("jml").max = e.options[e.selectedIndex].dataset.stok;
+
+        getTotal();
+
     }
 
+    function cJml() {
+        getTotal();
+    }
+
+    function getTotal() {
+        document.getElementById("total").value = document.getElementById("jml").value * document.getElementById("harga").value;
+        var diskon = document.getElementById("total").value * (dis/100);
+        document.getElementById("total_bayar").value = document.getElementById("total").value - diskon;
+        getSisa();
+    }
+
+    function getSisa(){
+        document.getElementById("sisa").value = document.getElementById("uang").value - document.getElementById("total_bayar").value;
+    }
 
     (function() {
         'use strict'
