@@ -22,6 +22,6 @@ if (!isset($_SESSION['isLogin'])) {
 } else if (isset($_SESSION['id_karyawan'])) {
     $nama = $_SESSION['username'];
     require_once "App/View/Karyawan/TP/header.php"; // REQUIRE Header Page Karyawan
-    require_once "App/View/Karyawan/$page/$content.php"; // REQUIRE Content Page Karyawan
+    require_once "App/View/Karyawan/Kasir/$content.php"; // REQUIRE Content Page Karyawan
     require_once "App/View/Karyawan/TP/footer.php"; // REQUIRE Footer Page Karyawan
 }

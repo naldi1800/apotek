@@ -22,7 +22,9 @@ if (isset($_POST["tambah"])) {
                 $obats = Obat::GetAll($link);
                 foreach ($obats as $obat) :
                 ?>
-                    <option value="<?= $obat['id_obat'] ?>" data-nama="<?= $obat['nama_obat'] ?>"><?= $obat['barcode'] ?> | <?= $obat['nama_obat'] ?></option>
+                    <option value="<?= $obat['id_obat'] ?>" data-nama="<?= $obat['nama_obat'] ?>" data-diskon="<?= $obat['diskon'] ?>" data-stok="<?= $obat['stok'] ?>" data-harga="<?= $obat['harga'] ?>">
+                        <?= $obat['barcode'] ?> | <?= $obat['nama_obat'] ?>
+                    </option>
                 <?php endforeach; ?>
             </select>
             <!-- <input type="text" class="form-control" id="barcode" name="barcode" maxlength="5" minlength="5"
@@ -35,13 +37,21 @@ if (isset($_POST["tambah"])) {
             </div>
         </div>
 
-        <div class="col-md-8">
+        <div class="col-md-3">
             <label for="nama_obat" class="form-label">Nama Obat</label>
-            <input type="text" class="form-control" id="nama_obat" name="nama_obat" minlength="3" required>
+            <input type="text" class="form-control" id="nama_obat" name="nama_obat" minlength="3" required readonly>
         </div>
-        <div class="col-md-8">
-            <label for="semester" class="form-label">Semester</label>
-            <input type="text" class="form-control" id="semester" name="semester" required>
+        <div class="col-md-3">
+            <label for="harga" class="form-label">Harga</label>
+            <input type="text" class="form-control" id="harga" name="harga" minlength="3" required readonly>
+        </div>
+        <div class="col-md-2">
+            <label for="stok" class="form-label">Stok</label>
+            <input type="text" class="form-control" id="stok" name="stok" minlength="3" required readonly>
+        </div>
+        <div class="col-md-4">
+            <label for="totalbeli" class="form-label">Total Beli</label>
+            <input type="number" class="form-control" id="totalbeli" name="totalbeli" min="1" value="1" required>
             <div class="valid-feedback">
                 Looks good!
             </div>
@@ -50,14 +60,12 @@ if (isset($_POST["tambah"])) {
             </div>
         </div>
         <div class="col-md-4">
-            <label for="sks" class="form-label">SKS</label>
-            <input type="text" class="form-control" id="sks" name="sks" required>
-            <div class="valid-feedback">
-                Looks good!
-            </div>
-            <div class="invalid-feedback">
-                Please enter in the student's name and at least 3 letters
-            </div>
+            <label for="total_harga" class="form-label">Total Harga</label>
+            <input type="text" class="form-control" id="total_harga" name="total_harga" required readonly>
+        </div>
+        <div class="col-md-4">
+            <label for="diskon" class="form-label">Diskon</label>
+            <input type="text" class="form-control" id="diskon" name="diskon" required readonly>
         </div>
         <div class="col-12">
             <button class="btn btn-primary" type="submit" name="tambah">Save</button>
@@ -67,11 +75,9 @@ if (isset($_POST["tambah"])) {
 
 <script>
     function getObat(e) {
-        var text = e.options[e.selectedIndex].text;
-        text = text.split("|");
-        text = text[1];
-        document.getElementById("nama_obat").value = text;
-        console.log(e.options[e.selectedIndex].getAttribut('data-nama'));
+        document.getElementById("nama_obat").value = e.options[e.selectedIndex].dataset.nama;
+        document.getElementById("harga").value = e.options[e.selectedIndex].dataset.harga;
+        document.getElementById("stok").value = e.options[e.selectedIndex].dataset.stok;
     }
 
 
