@@ -67,9 +67,9 @@ class Penjualan extends Data
 
         $query = mysqli_query($link, $sql);
         if ($query) {
-            Alert::Set("Data matakuliah", "disimpan", "berhasil");
+            Alert::Set("Penjualaan", "disimpan", "berhasil");
         } else {
-            Alert::Set("Data matakuliah", "disimpan", "gagal");
+            Alert::Set("Penjualaan", "disimpan", "gagal");
 //            echo "Error : " . mysqli_error($link);
         }
     }
