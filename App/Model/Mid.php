@@ -24,7 +24,7 @@ class Mid extends Data
 
     public static function GetWithId($link, $id)
     {
-        $sql = "SELECT * FROM " . parent::$t_mid . " WHERE id_mid='" . $id . "'";
+        $sql = "SELECT * FROM " . parent::$t_mid . " WHERE id='" . $id . "'";
         $query = mysqli_query($link, $sql);
         return mysqli_fetch_assoc($query);
     }
@@ -32,7 +32,9 @@ class Mid extends Data
     public static function Update($link, $id, $data)
     {
         $sql = "UPDATE " . parent::$t_mid . " SET "
-            . "Pasien='" . $data['Pasien'] . "' WHERE id_mid='" . $id . "'";
+            . "pasien='" . $data['pasien'] 
+            . "', keluhan='" . $data['keluhan']
+            . "' WHERE id='" . $id . "'";
 
         $query = mysqli_query($link, $sql);
         if ($query) {
@@ -45,7 +47,7 @@ class Mid extends Data
 
     public static function Delete($link, $id)
     {
-        $sql = "DELETE FROM " . parent::$t_mid . " WHERE id_mid='" . $id . "'";
+        $sql = "DELETE FROM " . parent::$t_mid . " WHERE id='" . $id . "'";
         $query = mysqli_query($link, $sql);
         if ($query) {
             Alert::Set("Pasien", "dihapus", "berhasil");
@@ -57,8 +59,8 @@ class Mid extends Data
     public static function Insert($link, $data)
     {
         $sql = "INSERT INTO " . parent::$t_mid . " VALUES( null, '"
-            . $data['Pasien'] . "','"
-            . $data['Keluhan'] . "')";
+            . $data['pasien'] . "','"
+            . $data['keluhan'] . "')";
             
         
         // var_dump($sql);

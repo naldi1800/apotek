@@ -22,6 +22,7 @@
     use App\Model\Penjualan;
     $no = 1;
     $datas = Penjualan::GetAll($link);
+    if($datas != null):
     foreach ($datas as $data) :
 
         ?>
@@ -36,13 +37,15 @@
                     <!-- <a href="?page=penjualan&c=ubah&id=<?= $data['Kode_MK'] ?>" class="text-center btn btn-info">
                         Edit
                     </a> -->
-                    <a href="?page=penjualan&c=hapus&id=<?= $data['Kode_MK'] ?>" class="text-center btn btn-danger">
+                    <a href="?page=penjualan&c=hapus&id=<?= $data['id_jual'] ?>" class="text-center btn btn-danger">
                         Hapus
                     </a>
                 </center>
             </td>
         </tr>
-    <?php $no++; endforeach; ?>
+    <?php $no++; endforeach; else: ?>
+        <td class="text-center" colspan="6">Data Kosong</td>
+        <?php endif; ?>
     </tbody>
 </table>
 

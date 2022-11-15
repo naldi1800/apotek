@@ -1,6 +1,6 @@
 <?php
     if($_GET['id'])
-        \App\Model\Dosen::Delete($link, $_GET['id']);
+        \App\Model\Obat::Delete($link, $_GET['id']);
 
-    header("location: " . BASEURL . "/index.php?page=dosen&c=index");
+    header("location: " . BASEURL . "/index.php?page=obat&c=index");
     exit;

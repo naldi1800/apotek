@@ -43,6 +43,9 @@
                     <a class="nav-link <?= ($page == 'Obat') ? 'active' : '' ?>" href="?page=obat&c=index">Data Obat</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link <?= ($page == 'Mid') ? 'active' : '' ?>" href="?page=mid&c=index">Data Mid</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link <?= ($page == 'Penjualan') ? 'active' : '' ?>"
                        href="?page=penjualan&c=index">Data Penjualan</a>
                 </li>
