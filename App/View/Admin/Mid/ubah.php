@@ -40,6 +40,17 @@ if (isset($_GET['id'])) {
                 Please enter keluhan
             </div>
         </div>
+
+        <div class="col-md-12">
+            <label for="alamat" class="form-label">Alamat</label>
+            <input type="text" value="<?= $data['alamat'] ?>" class="form-control" id="alamat" name="alamat" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Please enter alamat
+            </div>
+        </div>
         <div class="col-12">
             <button class="btn btn-primary col-12" type="submit" name="ubah">Save</button>
         </div>
