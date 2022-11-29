@@ -5,6 +5,7 @@ abstract class Data
     protected static $t_penjualan = "penjualan";
     protected static $t_obat = "obat";
     protected static $t_mid = "midtest";
+    protected static $t_history = "history";
 
     
 

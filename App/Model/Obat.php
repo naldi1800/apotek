@@ -5,6 +5,7 @@ namespace App\Model;
 
 use App\Contorller\Alert;
 use App\Model\Data;
+use App\Model\History;
 use mysqli;
 
 class Obat extends Data
@@ -31,15 +32,19 @@ class Obat extends Data
 
     public static function Update($link, $id, $data)
     {
-        $sql = "UPDATE " . parent::$t_obat . " SET "
-            . "Nama_Dosen='" . $data['nama_dosen'] . "' WHERE id_obat='" . $id . "'";
+        $sql = "UPDATE " . parent::$t_obat . " set "
+            . "barcode='" . $data['barcode'] . "',"
+            . "nama_obat='" . $data['nama_obat'] . "',"
+            . "harga='" . $data['harga'] . "',"
+            . "diskon='" . $data['diskon'] .  "',"
+            . "updatetime=CURRENT_TIMESTAMP WHERE id_obat='" . $id . "'";
 
         $query = mysqli_query($link, $sql);
         if ($query) {
-            Alert::Set("Data dosen", "diubah", "berhasil");
+            Alert::Set("Data obat", "diubah", "berhasil");
         } else {
-            Alert::Set("Data dosen", "diubah", "gagal");
-//            echo "Error : " . mysqli_error($link);
+            Alert::Set("Data obat", "diubah", "gagal");
+            //            echo "Error : " . mysqli_error($link);
         }
     }
 
@@ -48,9 +53,9 @@ class Obat extends Data
         $sql = "DELETE FROM " . parent::$t_obat . " WHERE id_obat='" . $id . "'";
         $query = mysqli_query($link, $sql);
         if ($query) {
-            Alert::Set("Data dosen", "dihapus", "berhasil");
+            Alert::Set("Data obat", "dihapus", "berhasil");
         } else {
-            Alert::Set("Data dosen", "dihapus", "gagal");
+            Alert::Set("Data obat", "dihapus", "gagal");
         }
     }
 
@@ -61,16 +66,41 @@ class Obat extends Data
             . $data['nama_obat'] . "','"
             . $data['harga'] . "','"
             . $data['diskon'] . "','"
-            . $data['stok'] . "', '0000-00-00 00:00:00','0000-00-00 00:00:00')";
-        
+            . $data['stok'] . "', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
+
         // var_dump($sql);
         $query = mysqli_query($link, $sql);
-        
+
         if ($query) {
             Alert::Set("Data obat", "disimpan", "berhasil");
         } else {
             Alert::Set("Data obat", "disimpan", "gagal");
-        //    echo "Error : " . mysqli_error($link);
+            //    echo "Error : " . mysqli_error($link);
         }
+    }
+
+    public static function Stok($link, $data)
+    {
+        $stok = $data['stok'];
+        $msg = "";
+        if (isset($data['checklist'])) {
+            $sql = "UPDATE " . parent::$t_obat . " SET "
+                . "stok=stok-$stok , updatetime=CURRENT_TIMESTAMP  WHERE id_obat='" . $data['id'] . "'";
+                $msg = "dikurangi";
+        }else{
+            $sql = "UPDATE " . parent::$t_obat . " SET "
+                . "stok=stok+$stok , updatetime=CURRENT_TIMESTAMP WHERE id_obat='" . $data['id'] . "'";
+                $msg = "ditambahi";
+        }
+
+        $query = mysqli_query($link, $sql);
+        if ($query) {
+            History::Insert($link, $data);
+            Alert::Set("Data stok obat", "$msg", "berhasil");
+        } else {
+            Alert::Set("Data stok obat", "$msg", "gagal");
+            //            echo "Error : " . mysqli_error($link);
+        }
+        var_dump($data);
     }
 }

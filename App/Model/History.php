@@ -11,7 +11,7 @@ class History extends Data
 
     public static function GetAll($link)
     {
-        $sql = "SELECT * FROM " . parent::$t_inti . " AS A JOIN " . parent::$t_mahasiswa . " AS B ON A.STB=B.STB";
+        $sql = "SELECT * FROM " . parent::$t_history . " AS A JOIN " . parent::$t_obat . " AS B ON A.id_obat=B.id_obat";
         $query = mysqli_query($link, $sql);
         $data = null;
         while ($result = mysqli_fetch_array($query)) {
@@ -19,25 +19,6 @@ class History extends Data
         }
         return $data;
     }
-
-    public static function GetAllWithKelas($link, $kelas)
-    {
-        $sql = "SELECT * FROM " . parent::$t_inti . " AS A JOIN " . parent::$t_mahasiswa . " AS B ON A.STB=B.STB WHERE A.Kode_Kelas='" . $kelas . "'";
-        $query = mysqli_query($link, $sql);
-        $data = null;
-        while ($result = mysqli_fetch_array($query)) {
-            $data[] = $result;
-        }
-        return $data;
-    }
-
-    public static function GetWithStbAndKelas($link, $kelas, $stb)
-    {
-        $sql = "SELECT * FROM " . parent::$t_inti . " AS A JOIN " . parent::$t_mahasiswa . " AS B ON A.STB=B.STB WHERE A.Kode_Kelas='" . $kelas . "' AND A.STB='" . $stb . "'";
-        $query = mysqli_query($link, $sql);
-        return mysqli_fetch_assoc($query);
-    }
-
     public static function GetWithId($link, $id)
     {
         return null;
@@ -50,28 +31,25 @@ class History extends Data
 
     public static function Delete($link, $id)
     {
-        $sql = "DELETE FROM " . parent::$t_inti . " WHERE Id_Inti='" . $id . "'";
-        $query = mysqli_query($link, $sql);
-        if ($query) {
-            Alert::Set("Data", "dihapus", "berhasil");
-        } else {
-            Alert::Set("Data", "dihapus", "gagal");
-        }
+        return null;
     }
 
     public static function Insert($link, $data)
-    {
-        $sql = "INSERT INTO " . parent::$t_inti . " VALUES( "
+    {   
+        if($data['ket'] == "") $data['ket'] = "Ditambahkan";
+        else $data['ket'] = "Dikurangkan karena : " . $data['ket'];
+        $sql = "INSERT INTO " . parent::$t_history . " VALUES( "
             . "NULL,'"
-            . $data['kode_kelas'] . "','"
-            . $data['stb'] . "')";
+            . $data['id'] . "','"
+            . $data['stok'] . "','"
+            . $data['ket'] . "', CURRENT_TIMESTAMP)";
 
         $query = mysqli_query($link, $sql);
-        if ($query) {
-            Alert::Set("Data", "disimpan", "berhasil");
-        } else {
-            Alert::Set("Data", "disimpan", "gagal");
-//            echo "Error : " . mysqli_error($link);
-        }
+        // if ($query) {
+        //     // Alert::Set("Data History", "disimpan", "berhasil");
+        // } else {
+        //     // Alert::Set("Data History", "disimpan", "gagal");
+        //                echo "Error : " . mysqli_error($link);
+        // }
     }
 }

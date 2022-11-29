@@ -22,36 +22,22 @@ class Penjualan extends Data
 
     public static function GetWithId($link, $id)
     {
-        $sql = "SELECT * FROM " . parent::$t_penjualan . " WHERE Kode_MK='" . $id . "'";
-        $query = mysqli_query($link, $sql);
-        return mysqli_fetch_assoc($query);
+        return null;
     }
 
     public static function Update($link, $id, $data)
     {
-        $sql = "UPDATE " . parent::$t_penjualan . " SET "
-            . "Kode_MK='" . $data['kode_mk'] . "',"
-            . "Nama_Matakuliah='" . $data['nama_mk'] . "',"
-            . "Semester='" . $data['semester'] . "',"
-            . "SKS='" . $data['sks'] . "' WHERE Kode_MK='" . $id . "'";
-
-        $query = mysqli_query($link, $sql);
-        if ($query) {
-            Alert::Set("Data matakuliah", "diubah", "berhasil");
-        } else {
-            Alert::Set("Data matakuliah", "diubah", "gagal");
-//            echo "Error : " . mysqli_error($link);
-        }
+        return null;
     }
 
     public static function Delete($link, $id)
     {
-        $sql = "DELETE FROM " . parent::$t_penjualan . " WHERE Kode_MK='" . $id . "'";
+        $sql = "DELETE FROM " . parent::$t_penjualan . " WHERE id_jual='" . $id . "'";
         $query = mysqli_query($link, $sql);
         if ($query) {
-            Alert::Set("Data matakuliah", "dihapus", "berhasil");
+            Alert::Set("Data penjualan", "dihapus", "berhasil");
         } else {
-            Alert::Set("Data matakuliah", "dihapus", "gagal");
+            Alert::Set("Data penjualan", "dihapus", "gagal");
         }
     }
 
@@ -62,8 +48,7 @@ class Penjualan extends Data
             . $_SESSION['id_karyawan'] . "','"
             . $data['harga'] . "','"
             . $data['diskon'] . "','"
-            . $data['jml'] . "','"
-            . "2022-11-14 01:00:00" . "')";
+            . $data['jml'] . "', CURRENT_TIMESTAMP)";
 
         $query = mysqli_query($link, $sql);
         if ($query) {
