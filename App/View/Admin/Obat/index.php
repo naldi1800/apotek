@@ -4,7 +4,7 @@ use  App\Model\Obat;
 
 if (isset($_POST["submitButton"])) {
     Obat::Stok($link, $_POST);
-    // header("Location: index.php?page=obat&c=index");
+    header("Location: index.php?page=obat&c=index");
     exit;
 }
 ?>
@@ -66,6 +66,7 @@ if (isset($_POST["submitButton"])) {
                         <form class="row g-3 needs-validation p-3" method="post" novalidate>
                             <div class="modal-body">
                                 <input type="text" class="form-control" id="id" value="<?= $data['id_obat'] ?>" name="id" hidden>
+                                <input type="text" class="form-control" id="stokawal" value="<?= $data['stok'] ?>" name="stokawal" hidden>
                                 <div class="col-md-12">
                                     <label for="stok" class="form-label">Stok</label>
                                     <input type="number" class="form-control" id="stok" min="0" name="stok" required>

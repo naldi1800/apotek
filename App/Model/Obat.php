@@ -86,13 +86,13 @@ class Obat extends Data
         if (isset($data['checklist'])) {
             $sql = "UPDATE " . parent::$t_obat . " SET "
                 . "stok=stok-$stok , updatetime=CURRENT_TIMESTAMP  WHERE id_obat='" . $data['id'] . "'";
-                $msg = "dikurangi";
-        }else{
+            $msg = "dikurangi";
+        } else {
             $sql = "UPDATE " . parent::$t_obat . " SET "
                 . "stok=stok+$stok , updatetime=CURRENT_TIMESTAMP WHERE id_obat='" . $data['id'] . "'";
-                $msg = "ditambahi";
+            $msg = "ditambahi";
         }
-
+        $data['kon'] = isset($data['checklist']) ? 0 : 1;
         $query = mysqli_query($link, $sql);
         if ($query) {
             History::Insert($link, $data);

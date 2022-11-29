@@ -9,6 +9,9 @@ if (isset($_POST["tambah"])) {
     exit;
 }
 ?>
+    <div class="cols-8">
+        <a href="<?= BASEURL ?>/logout.php">Logout</a>
+    </div>
 <div class="col-lg-8 mx-auto border rounded-3 border-primary">
     <h2 class="h2 text-center mt-3">
         KASIR APOTEK

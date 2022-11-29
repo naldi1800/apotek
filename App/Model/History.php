@@ -42,6 +42,8 @@ class History extends Data
             . "NULL,'"
             . $data['id'] . "','"
             . $data['stok'] . "','"
+            . $data['stokawal'] . "','"
+            . $data['kon'] . "','"
             . $data['ket'] . "', CURRENT_TIMESTAMP)";
 
         $query = mysqli_query($link, $sql);
