@@ -7,6 +7,7 @@
     <tr>
         <th>No</th>
         <th>Nama Pasien</th>
+        <th>Alamat</th>
         <th>Keluhan</th>
         <th>Action</th>
     </tr>
@@ -21,10 +22,11 @@
 $i++;
         ?>
         <tr>
-            <td width="15%" class="text-center"><?= $i ?></td>
+            <td width="10%" class="text-center"><?= $i ?></td>
             <td width="30%" class="text-center"><?= $data['pasien'] ?></td>
-            <td width="30%" class="text-center"><?= $data['keluhan'] ?></td>
-            <td width="25%" class="">
+            <td width="20%" class="text-center"><?= $data['alamat'] ?></td>
+            <td width="20%" class="text-center"><?= $data['keluhan'] ?></td>
+            <td width="20%" class="">
                 <center>
                     <a href="?page=mid&c=ubah&id=<?= $data['id'] ?>" class="text-center btn btn-info">
                         Edit

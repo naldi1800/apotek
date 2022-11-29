@@ -33,6 +33,7 @@ class Mid extends Data
     {
         $sql = "UPDATE " . parent::$t_mid . " SET "
             . "pasien='" . $data['pasien'] 
+            . "', alamat='" . $data['alamat']
             . "', keluhan='" . $data['keluhan']
             . "' WHERE id='" . $id . "'";
 
@@ -60,6 +61,7 @@ class Mid extends Data
     {
         $sql = "INSERT INTO " . parent::$t_mid . " VALUES( null, '"
             . $data['pasien'] . "','"
+            . $data['alamat'] . "',"
             . $data['keluhan'] . "')";
             
         
