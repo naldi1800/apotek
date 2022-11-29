@@ -4,43 +4,67 @@
 <a href="?page=obat&c=tambah" class="btn btn-outline-success mb-3">Tambah</a>
 <table class="table table-hover table-bordered">
     <thead class="bg-secondary text-white text-center">
-    <tr>
-        <th>No</th>
-        <th>Barcode</th>
-        <th>Nama Obat</th>
-        <th>Harga</th>
-        <th>Diskon</th>
-        <th>Stok</th>
-        <th>Action</th>
-    </tr>
+        <tr>
+            <th>No</th>
+            <th>Barcode</th>
+            <th>Nama Obat</th>
+            <th>Harga</th>
+            <th>Diskon</th>
+            <th>Stok</th>
+            <th>Action</th>
+        </tr>
     </thead>
     <tbody>
-    <?php
+        <?php
 
-    use App\Model\Obat;
-    $i = 0;
-    $datas = Obat::GetAll($link);
-    foreach ($datas as $data) :
-$i++;
+        use App\Model\Obat;
+
+        $i = 0;
+        $datas = Obat::GetAll($link);
+        foreach ($datas as $data) :
+            $i++;
         ?>
-        <tr>
-            <td width="5%" class="text-center"><?= $i ?></td>
-            <td width="25%" class="text-center"><?= $data['barcode'] ?></td>
-            <td width="25%" class="text-center"><?= $data['nama_obat'] ?></td>
-            <td width="10%" class="text-center"><?= $data['harga'] ?></td>
-            <td width="10%" class="text-center"><?= $data['diskon'] ?></td>
-            <td width="10%" class="text-center"><?= $data['stok'] ?></td>
-            <td width="15%" class="">
-                <center>
-                    <a href="?page=obat&c=ubah&id=<?= $data['id_obat'] ?>" class="text-center btn btn-info">
-                        Edit
-                    </a>
-                    <a href="?page=obat&c=hapus&id=<?= $data['id_obat'] ?>" class="text-center btn btn-danger">
-                        Hapus
-                    </a>
-                </center>
-            </td>
-        </tr>
-    <?php endforeach; ?>
+            <tr>
+                <td width="5%" class="text-center"><?= $i ?></td>
+                <td width="25%" class="text-center"><?= $data['barcode'] ?></td>
+                <td width="25%" class="text-center"><?= $data['nama_obat'] ?></td>
+                <td width="10%" class="text-center"><?= $data['harga'] ?></td>
+                <td width="10%" class="text-center"><?= $data['diskon'] ?></td>
+                <td width="10%" class="text-center">
+                    <?= $data['stok'] ?>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Add Stok
+                    </button>
+                </td>
+                <td width="15%" class="">
+                    <center>
+                        <a href="?page=obat&c=ubah&id=<?= $data['id_obat'] ?>" class="text-center btn btn-info">
+                            Edit
+                        </a>
+                        <a href="?page=obat&c=hapus&id=<?= $data['id_obat'] ?>" class="text-center btn btn-danger">
+                            Hapus
+                        </a>
+                    </center>
+                </td>
+            </tr>
+        <?php endforeach; ?>
     </tbody>
 </table>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
