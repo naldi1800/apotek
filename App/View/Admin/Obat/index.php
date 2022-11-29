@@ -33,7 +33,7 @@
                 <td width="10%" class="text-center">
                     <?= $data['stok'] ?>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        Add Stok
+                        Edit Stok
                     </button>
                 </td>
                 <td width="15%" class="">
@@ -55,16 +55,76 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Ubah Stok</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+            <form class="row g-3 needs-validation p-3" method="post" novalidate>
+                <div class="modal-body">
+                    <div class="col-md-12">
+                        <label for="stok" class="form-label">Stok</label>
+                        <input type="number" class="form-control" id="stok" min="0" name="stok" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please enter in the Stok
+                        </div>
+                    </div>
+                    <div class="col-md-12 mt-3">
+                        <input id="checklist" name="checklist" type="checkbox" class="form-check-input" onchange="isChecklist(this.checked);">
+                        <label for="checklist" class="form-check-label">Ceklis jika ingin mengurangkan stok</label>
+                    </div>
+                    <div class="col-md-12" id="ketParent" hidden>
+                        <label for="ket" class="form-label">Keterangan</label>
+                        <input type="text" class="form-control" id="ket" name="ket">
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Wajib diisi
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="submitButton" type="submit" class="btn btn-primary">Tambah</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+
+<script>
+    function isChecklist(v){
+        if(v){
+            document.getElementById("ketParent").removeAttribute('hidden');
+            document.getElementById("ket").setAttribute('required', 'true')
+            document.getElementById("submitButton").innerHTML = "Kurang";
+        }else{
+            document.getElementById("ketParent").setAttribute('hidden','true');
+            document.getElementById("ket").removeAttribute('required');
+            document.getElementById("submitButton").innerHTML = "Tambah";
+        }
+    }
+</script>
+
+<script>
+    (function() {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>
