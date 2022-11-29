@@ -25,6 +25,17 @@ class Penjualan extends Data
         return null;
     }
 
+    public static function GetAllWithFilter($link, $filter)
+    {
+        $sql = "SELECT * FROM " . parent::$t_penjualan . " as A JOIN " . parent::$t_obat . " as B ON A.id_obat=B.id_obat WHERE CONCAT(YEAR(A.soldtime),'-',MONTH(A.soldtime))='" . $filter . "'";
+        $query = mysqli_query($link, $sql);
+        $data = null;
+        while ($result = mysqli_fetch_array($query)) {
+            $data[] = $result;
+        }
+        return $data;
+    }
+
     public static function Update($link, $id, $data)
     {
         return null;
@@ -55,7 +66,7 @@ class Penjualan extends Data
             Alert::Set("Penjualaan", "disimpan", "berhasil");
         } else {
             Alert::Set("Penjualaan", "disimpan", "gagal");
-//            echo "Error : " . mysqli_error($link);
+            //            echo "Error : " . mysqli_error($link);
         }
     }
 }

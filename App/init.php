@@ -7,8 +7,11 @@
     require_once "App/Model/History.php";
     require_once "App/Model/Login.php";
 
+    //UTILS
+    // require_once "App/Utils/fpdf.php";
+    
     //CONTROLLER
     require_once "App/Controller/Alert.php"; //CLASS PEMBERITAHUAN
-    // require_once "App/Controller/Fungsi.php"; // CLASS FUNGSI
+    require_once "App/Controller/Fungsi.php"; // CLASS FUNGSI
 
 
